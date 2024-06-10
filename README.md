@@ -35,4 +35,4 @@ _A continuación encontrara los link a cada carpeta:_
 * **Simón Tomás Carabajal** - *Rol* - [SimonCarabajal](https://github.com/SimonCarabajal)
 * **Rocio Belén Arriola** - *Rol* - [ArriolaBelen](https://github.com/ArriolaBelen)
 
-_Mira también la lista de [contribuidores]([https://github.com/your/project/contributors](https://github.com/CodeStrong2023/Codigo-33-12-Mascota-Virtual/graphs/contributors)) que han participado en este proyecto._
+_Mira también la lista de [contribuidores](https://github.com/CodeStrong2023/Codigo-33-12-Mascota-Virtual/graphs/contributors) que han participado en este proyecto._
