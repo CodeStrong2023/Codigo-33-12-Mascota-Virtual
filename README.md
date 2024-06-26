@@ -28,10 +28,10 @@ _A continuación encontrara los link a cada carpeta:_
 
 ## Autores ✒️
 
-* **Gianella Ariadna Achetoni** - *Rol* - [Gianella-A-Achetoni](https://github.com/Gianella-A-Achetoni)
+* **Gianella Ariadna Achetoni** - Desarrolladora Diseño Gráfico - [Gianella-A-Achetoni](https://github.com/Gianella-A-Achetoni)
 * **Ezequiel Andres Flores** - *Rol* - [EzeFlores](https://github.com/EzeFlores1988)
 * **Jessica Pagano** - *Rol* - [JessicaPagano](https://github.com/JessicaPagano)
-* **Sofía Belén López** - *Rol* - [Soofbb](https://github.com/Soofbb)
+* **Sofía Belén López** - Desarrolladora Diseño Gráfico - [Soofbb](https://github.com/Soofbb)
 * **Simón Tomás Carabajal** - *Rol* - [SimonCarabajal](https://github.com/SimonCarabajal)
 * **Rocio Belén Arriola** - *Rol* - [ArriolaBelen](https://github.com/ArriolaBelen)
 
