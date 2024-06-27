@@ -1,9 +1,19 @@
 import flet as ft
-from flet import *
+import asyncio
+import aiohttp
 
 async def main(page: ft.Page):
-    # Caracteristicas de la ventana
+    #funcion para cerrar la pag 
+    def close_page(e):
+        page.clean()
+        page.go("/")
+        
+    #Funcion de ejemplo pata mostrar el ID de los botones seleccionados
+    def on_button_click(e):
+        print(f"Botón con ID {e.control.data} presionado")
+        
 
+    #Caracteristicas de la ventana
     page.window_width = 400
     page.window_height = 450
     page.window_resizable = False
@@ -29,30 +39,34 @@ async def main(page: ft.Page):
 
     imagenTamagotchi = ft.Image (
         src = "Imagenes/tamagotchi.png",
-        scale = 0.5,
+        scale = 0.5,      
     )
 
     # Botones (Salir, Flechas, Circulo)
     botonSalida = ft.ElevatedButton(
-        width = 30,
-        on_click = lambda _: page.go("/"),
+        content=ft.Icon(ft.icons.CLOSE, color=ft.colors.WHITE),
+        width=50,
+        height=50,
+        on_click=close_page,
         style = ft.ButtonStyle(
-            shape = ft.CircleBorder(),
-            bgcolor = cyan,
-            side = ft.BorderSide(width=3, color=blanco),
-        ),
+            bgcolor=ft.colors.RED,
+            shape=ft.CircleBorder(),  
+            side = ft.BorderSide(width=2, color=blanco),
+        )
+        
     )
 
     # Diseño de la parte superior, se agrega el boton y la imagen de logo
-    disenoSuperior = [ ft.Container(
+    disenoSuperior = [ 
+        ft.Container(
             botonSalida,
             width = 80,
             height = 45 ,
-            # border = ft.border.all() <-- margen para la creacion del diseño
+            # border = ft.border.all()  <-- margen para la creacion del diseño
         ),
         ft.Container(
             imagenLogo,
-            alignment =ft.alignment.center,
+            alignment=ft.alignment.center,
             expand= True  # Permite que el contenedor de la imagen se expanda para centrar la imagen
         ),
     ]
@@ -66,6 +80,8 @@ async def main(page: ft.Page):
             border = ft.border.all(4, blanco),
             content = ft.Container(
                 imagenTamagotchi,
+                alignment= ft.alignment.center,
+                scale=1,
             ),
             alignment = ft.alignment.center
         )
@@ -80,7 +96,7 @@ async def main(page: ft.Page):
         width= 380,
         height= 45,
         margin= ft.margin.only(top=15),
-        #border = ft.border.all() #<-- margen para la creacion del diseño
+        #border = ft.border.all() <-- margen para la creacion del diseño
     )
 
     cuadroCentral = ft.Container(
@@ -90,15 +106,32 @@ async def main(page: ft.Page):
         margin= ft.margin.only(top=15),
         alignment= ft.alignment.center,
         #border = ft.border.all(), <-- margen para la creacion del diseño
-
     )
-
-    cuadroInferior = ft.Container(
+    
+    cuadroInferior = ft.Container(#El data es el equivalente a un ID
         width = 380,
         height = 60,
         margin = ft.margin.only(top=15),
-        #content = ft.Row(botonFlechaIzq), Flecha no creada aun
-        #border = ft.border.all() <-- margen para la creacion del diseño
+        alignment= ft.alignment.center,
+        content = 
+            ft.Row(      
+                    alignment=ft.MainAxisAlignment.CENTER,  
+                    controls=[
+                        #Boton1
+                        ft.ElevatedButton(text="<",height=50,width=50,data="BotonIzquierdo",style=ft.ButtonStyle(
+                            shape=ft.CircleBorder(),  
+                        ),color=ft.colors.BLACK,on_click=on_button_click),
+                        #Boton2
+                        ft.ElevatedButton(height=50,width=50,data="BotonDelMedio",style=ft.ButtonStyle(
+                            shape=ft.CircleBorder(),
+                        ),color=ft.colors.BLACK,on_click=on_button_click),
+                        #Boton3
+                        ft.ElevatedButton(text=">",height=50,width=50,data="BotonDerecho",style=ft.ButtonStyle(
+                            shape=ft.CircleBorder(),  
+                        ),color=ft.colors.BLACK,on_click=on_button_click),
+                    ]
+            )
+            #border = ft.border.all() <-- margen para la creacion del diseño
     )
 
     columna = ft.Column(
@@ -126,5 +159,4 @@ async def main(page: ft.Page):
     )
 
     await page.add_async(contenedor)
-    page.add(pantallaCentral)
-ft.app(target=main)
+ft.app(target=main, port=5050)
