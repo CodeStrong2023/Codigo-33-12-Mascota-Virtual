@@ -19,6 +19,16 @@ class Tamagotchi:
         else:
             print(f"{self.nombre} no está aburrido.")
 
+    def dormir(self):
+        # Verificamos si el Tamagotchi está cansado
+        if self.cansancio > 0:
+            # Reducimos el cansancio en 1
+            self.cansancio -= 1
+            print(f"{self.nombre} ha dormido. Cansancio: {self.cansancio}")
+        else:
+            # Si no está cansado, informamos al usuario
+            print(f"{self.nombre} no está cansado.")
+
     def tiempo_pasa(self):
         self.hambre += 1
         self.aburrimiento += 1
