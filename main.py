@@ -1,6 +1,8 @@
 import flet as ft
+import asyncio
+from ui import create_ui
 
-def main(page: ft.Page):
-    page.add(ft.Text(value="Hola Mundo!!"))
+async def main(page: ft.Page):
+    await create_ui(page)
 
-ft.app(target=main)
+ft.app(target=main, port=5050)
