@@ -22,7 +22,7 @@ class Tamagotchi:
     def dormir(self):
         if self.sueno > 0:
             self.sueno -= 1
-            print(f"{self.nombre} ha dormido. cansancio: {self.sueno}")
+            print(f"{self.nombre} ha dormido. sueno: {self.sueno}")
         else:
            print(f"{self.nombre} no está cansado.")
 
