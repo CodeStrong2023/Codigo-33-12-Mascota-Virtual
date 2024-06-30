@@ -1,56 +1,48 @@
-#SE CREA CLASE - STATS EN CERO(INICIALIZACION EN CERO) - - ¿AGREGAR ALGO MAS?
+#La clase Tamagotchi es la representación básica de una mascota virtual.
+#Estos atributos se inician en cero y representan el estado de la mascota en cuanto a su necesidad de comer, jugar o dormir. 
 class Tamagotchi:
     def __init__(self, nombre):
         self.nombre = nombre
         self.hambre = 0
         self.aburrimiento = 0
         self.sueno = 0
-
-    def alimentar(self):
-        if self.hambre > 0:
-            self.hambre -= 1
-            print(f"Alimentaste a {self.nombre}. Hambre: {self.hambre}")
-        else:
-            print(f"{self.nombre} no tiene hambre.")
-
-#Se crea un bucle que permitirá al usuario interactuar con el Tamagotchi.
-#MENU INTERACTIVO EN DONDE EL USUARIO ELIGE QUE HACER
+        
+# 1- Definición de la función main():
+#Aqui se pide al usuario que introduzca el nombre de su Tamagotchi y Se crea un objeto Tamagotchi con ese nombre.
 def main():
     nombre = input("¿Cómo se llama tu Tamagotchi? ")
     mascota = Tamagotchi(nombre)
+
+#2- Bucle while infinito que presenta un menú de opciones al usuario, las Opciones disponibles son:
+#Alimentar
+#Jugar
+#Dormir 
+#Selección de opción:
+#En donde el usuario elige una opción ingresando un número. Según la opción elegida, se llama a un método correspondiente del objeto MASCOTA(alimentar, jugar, dormir).
+#Después de cada acción, se llama al método "tiempo_pasa" con el argumento de la acción realizada para actualizar el estado del Tamagotchi.
 
     while True:
         print("\n¿Qué te gustaría hacer?")
         print("1. Alimentar")
         print("2. Jugar")
         print("3. Dormir")
-        print("4. Ver estado")
-        print("5. Salir")
-
+        
+#Aqui la Validación de la opción:
         opcion = input("Elige una opción: ")
-
-        # opciones del usario segun su eleccion -
+        
         if opcion == "1":
             mascota.alimentar()
+            mascota.tiempo_pasa("alimentar")
         elif opcion == "2":
             mascota.jugar()
+            mascota.tiempo_pasa("jugar")
         elif opcion == "3":
             mascota.dormir()
-        elif opcion == "4":
-            mascota.estado()
-        elif opcion == "5":
-            print("¡Hasta luego!")
-            break
+            mascota.tiempo_pasa("dormir")
+#Si la opción no es válida, se muestra un mensaje de error.
         else:
             print("Opción no válida.")
 
-
-        # HASTA AQUI REALICE FUNCIONES DE MENU - ELECCION DE USUARIO
-        # STATS - Y FUNCION ALIMENTAR - (JESSICA PAGANO)
-
+#3- Ejecución del programa: Donde se asegura que la función main() se ejecute solo si el script se ejecuta directamente.
 if __name__ == "__main__":
     main()
-
-# FUNCION PARA ALIMENTAR - - HACER DEMAS FUNCIONES - - FIJARSE LOS NOMBRES DE LOS STATS
-# PARA CONTINUAR CON LAS DEMAS FUNCIONES
-# ¿CAMBIAR ALGO MAS?
