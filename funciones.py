@@ -52,26 +52,23 @@ def main():
         print("1. Alimentar")
         print("2. Jugar")
         print("3. Dormir")
-        print("4. Ver estado")
-        print("5. Salir")
+        
 
         opcion = input("Elige una opción: ")
 
         if opcion == "1":
             mascota.alimentar()
+            mascota.tiempo_pasa("alimentar")
         elif opcion == "2":
             mascota.jugar()
+            mascota.tiempo_pasa("jugar")
         elif opcion == "3":
             mascota.dormir()
-        elif opcion == "4":
-            mascota.estado()
-        elif opcion == "5":
-            print("¡Hasta luego!")
-            break
+            mascota.tiempo_pasa("dormir")
         else:
             print("Opción no válida.")
-
-        mascota.tiempo_pasa()
+        
+        
 
 if __name__ == "__main__":
     main()
