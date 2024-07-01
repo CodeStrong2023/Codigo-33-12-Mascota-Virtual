@@ -9,18 +9,11 @@ _Esté proyecto se basa en una mascota virtual inpirada en el clasico juego "TAM
 * *Alimentarla*
 * *Llevarla a dormir*
 * *Jugar con ella*
-* *Limpiarla*
 
 ## Despliegue 📦
 
 _Como iniciarlo._
 
-_hgkd._
-
-_A continuación encontrara los link a cada carpeta:_
-* a
-* b
-* c
 
 ## Construido con 🛠️
 
@@ -29,10 +22,10 @@ _A continuación encontrara los link a cada carpeta:_
 ## Autores ✒️
 
 * **Gianella Ariadna Achetoni** - Desarrolladora Diseño Gráfico - [Gianella-A-Achetoni](https://github.com/Gianella-A-Achetoni)
-* **Ezequiel Andres Flores** - *Rol* - [EzeFlores](https://github.com/EzeFlores1988)
-* **Jessica Pagano** - *Rol* - [JessicaPagano](https://github.com/JessicaPagano)
+* **Ezequiel Andres Flores** - Desarollo Back-End - [EzeFlores](https://github.com/EzeFlores1988)
+* **Jessica Pagano** - Desarollo Back-End - [JessicaPagano](https://github.com/JessicaPagano)
 * **Sofía Belén López** - Desarrolladora Diseño Gráfico - [Soofbb](https://github.com/Soofbb)
-* **Simón Tomás Carabajal** - *Rol* - [SimonCarabajal](https://github.com/SimonCarabajal)
-* **Rocio Belén Arriola** - *Rol* - [ArriolaBelen](https://github.com/ArriolaBelen)
+* **Simón Tomás Carabajal** - Desarollo Back-End - [SimonCarabajal](https://github.com/SimonCarabajal)
+* **Rocio Belén Arriola** - Desarollo Back-End - [ArriolaBelen](https://github.com/ArriolaBelen)
 
 _Mira también la lista de [contribuidores](https://github.com/CodeStrong2023/Codigo-33-12-Mascota-Virtual/graphs/contributors) que han participado en este proyecto._
