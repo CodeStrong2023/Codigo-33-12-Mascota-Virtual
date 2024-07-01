@@ -1,57 +1,57 @@
 import flet as ft
 from funciones import Tamagotchi
 
-# Variables globales
-show_button = True
-button_pressed = False
-buttonpressed = False
-mascota = Tamagotchi("Tamagotchi")
-
-def close_page(e):
-    e.page.clean()
-    e.page.go("/")
-
-def on__click(e):
-    print(f"Botón con ID {e.control.data} presionado")
-
-def on_reinicio(e):
-    global buttonpressed
-    print(f"Botón con ID {e.control.data} presionado")
-    buttonpressed = True
-
-def on_button_click(e):
-    global show_button, button_pressed, button
-    print(f"Botón con ID {e.control.data} presionado")
-    show_button = False
-    button.visible = False
-    button_pressed = True
-    update_screen(e.page)
-
-def update_screen(page):
-    global button_pressed, pantallaCentral
-    if button_pressed:
-        pantallaCentral.content = ft.Image(
-            src="Imagenes/tamagotchi_huevo.gif",
-            scale=0.5,
-        )
-    else:
-        pantallaCentral.content = ft.Image(
-            src="Imagenes/tamagotchi.png",
-            scale=0.5,
-        )
-    page.update()
-
-# Función para crear la interfaz de usuario
 async def create_ui(page: ft.Page):
-    global pantallaCentral, button
+    show_button = True
+    button_pressed = False
+    
+    tamagotchi = Tamagotchi("Tama")
+    estado_tamagotchi = ft.Text(
+        value="Estado del Tamagotchi",
+        color=ft.colors.WHITE,
+        weight=ft.FontWeight.BOLD, 
+    )
+    alignment= ft.alignment.center,
 
-    # Características de la ventana
-    page.window_width = 400
-    page.window_height = 450
+    def close_page(e):
+        page.clean()
+        page.go("/")
+        
+    def on_click(e):
+        print(f"Botón con ID {e.control.data} presionado")
+        
+    def on_reinicio(e):
+        tamagotchi.reiniciar()
+        estado_tamagotchi.value = "Estado del Tamagotchi reiniciado"
+        page.update()
+    
+    def on_button_click(e):
+        nonlocal button_pressed
+        nonlocal show_button
+            
+        print(f"Botón con ID {e.control.data} presionado")
+        show_button = False
+        button_pressed = True
+        button.visible = False
+        page.update()
+    
+    def actualizar_estado(accion):
+        if accion == "alimentar":
+            mensaje = tamagotchi.alimentar()
+        elif accion == "jugar":
+            mensaje = tamagotchi.jugar()
+        elif accion == "dormir":
+            mensaje = tamagotchi.dormir()
+        
+        mensaje_tiempo = tamagotchi.tiempo_pasa(accion)
+        estado_tamagotchi.value = f"{mensaje}\n{mensaje_tiempo}"
+        page.update()
+
+    page.window_width = 500  # Ancho de la ventana
+    page.window_height = 450  # Alto de la ventana
     page.window_resizable = False
     page.padding = 0
 
-    # Colores del Tamagotchi
     azul = '#00215E'
     cyan = '#2C4E80'
     amarillo = '#FFC55A'
@@ -60,15 +60,13 @@ async def create_ui(page: ft.Page):
     blanco24 = '0x3DFFFFFF'
     verdelima = '#00FF00'
 
-    # Imágenes
     imagenLogo = ft.Image(
         src="Imagenes/logo.png",
         width=105,
         height=60,
         fit=ft.ImageFit.CONTAIN,
     )
-
-    # Botón de empezar
+    
     button = ft.ElevatedButton(
         text="Empezar",
         height=50,
@@ -82,24 +80,28 @@ async def create_ui(page: ft.Page):
         on_click=on_button_click,
         visible=show_button,
     )
-
-    # Botón de reinicio
+    
     buttonReinicio = ft.ElevatedButton(
-        content=ft.Icon(ft.icons.RESTART_ALT, color=ft.colors.WHITE),
+        content=ft.Icon(
+            ft.icons.RESTART_ALT,
+            color=ft.colors.WHITE),
         width=50,
         height=50,
         data="BotonReinicio",
         style=ft.ButtonStyle(
             shape=ft.CircleBorder(),
             bgcolor=ft.colors.BLUE,
-            side=ft.BorderSide(width=2, color=blanco),
+            side=ft.BorderSide(
+                width=2,
+                color=blanco),
         ),
-        on_click=on_reinicio,
+        on_click=on_reinicio,        
     )
 
-    # Botones (Salir, Flechas, Circulo)
     botonSalida = ft.ElevatedButton(
-        content=ft.Icon(ft.icons.CLOSE, color=ft.colors.WHITE),
+        content=ft.Icon(
+            ft.icons.CLOSE,
+            color=ft.colors.WHITE),
         width=50,
         height=50,
         on_click=close_page,
@@ -110,8 +112,7 @@ async def create_ui(page: ft.Page):
         )
     )
 
-    # Diseño de la parte superior
-    disenoSuperior = [
+    disenoSuperior = [ 
         ft.Container(
             botonSalida,
             width=80,
@@ -136,17 +137,21 @@ async def create_ui(page: ft.Page):
             bgcolor=blanco24,
             border_radius=20,
             border=ft.border.all(4, blanco),
-            content=ft.Image(
-                src="Imagenes/tamagotchi.png",
-                scale=0.5,
-            ),
+            content=ft.Stack([
+                estado_tamagotchi,
+                ft.Image(
+                    src="/Users/sofi/Tamagotchi Python/Imagenes/tamagotchi.png",
+                    scale=0.5,
+                ),
+            ]),
             alignment=ft.alignment.center,
         )
     ])
 
-    # Cuadrantes de guía: Superior, Central e Inferior
     cuadroSuperior = ft.Container(
-        content=ft.Row(disenoSuperior),
+        content=ft.Row(
+            disenoSuperior,
+        ),
         width=380,
         height=45,
         margin=ft.margin.only(top=15),
@@ -159,25 +164,31 @@ async def create_ui(page: ft.Page):
         margin=ft.margin.only(top=15),
         alignment=ft.alignment.center,
     )
-
+    
     cuadroInferior = ft.Container(
         width=380,
         height=60,
         margin=ft.margin.only(top=15),
         alignment=ft.alignment.center,
-        content=ft.Row(
+        content=ft.Column(
+            spacing=5,
             alignment=ft.MainAxisAlignment.CENTER,
             controls=[
-                ft.ElevatedButton(text="<", height=50, width=50, data="BotonIzquierdo", style=ft.ButtonStyle(
-                    shape=ft.CircleBorder(),
-                ), bgcolor=ft.colors.AMBER, color=ft.colors.BLACK, on_click=on__click),
-                ft.ElevatedButton(height=50, width=50, data="BotonDelMedio", style=ft.ButtonStyle(
-                    shape=ft.CircleBorder(),
-                ), bgcolor=ft.colors.AMBER, color=ft.colors.BLACK, on_click=on__click),
-                ft.ElevatedButton(text=">", height=50, width=50, data="BotonDerecho", style=ft.ButtonStyle(
-                    shape=ft.CircleBorder(),
-                ), bgcolor=ft.colors.AMBER, color=ft.colors.BLACK, on_click=on__click),
-                button,
+                ft.Row(
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    controls=[
+                        ft.ElevatedButton(text="<", height=50, width=50, data="alimentar", style=ft.ButtonStyle(
+                            shape=ft.CircleBorder(),
+                        ), bgcolor=ft.colors.AMBER, color=ft.colors.BLACK, on_click=lambda e: actualizar_estado("alimentar")),
+                        ft.ElevatedButton(height=50, width=50, data="jugar", style=ft.ButtonStyle(
+                            shape=ft.CircleBorder(),
+                        ), bgcolor=ft.colors.AMBER, color=ft.colors.BLACK, on_click=lambda e: actualizar_estado("jugar")),
+                        ft.ElevatedButton(text=">", height=50, width=50, data="dormir", style=ft.ButtonStyle(
+                            shape=ft.CircleBorder(),
+                        ), bgcolor=ft.colors.AMBER, color=ft.colors.BLACK, on_click=lambda e: actualizar_estado("dormir")),
+                        button,
+                    ]
+                )
             ]
         )
     )
@@ -193,12 +204,15 @@ async def create_ui(page: ft.Page):
 
     contenedor = ft.Container(
         columna,
-        width=400,
-        height=500,
+        width=500,  # Ancho de la ventana
+        height=450,  # Alto de la ventana
         bgcolor=cyan,
-        gradient=ft.LinearGradient([azul, rosado, amarillo]),
+        gradient=ft.LinearGradient([
+            azul,
+            rosado,
+            amarillo,
+        ]),
         alignment=ft.alignment.top_center,
     )
 
     await page.add_async(contenedor)
-    update_screen(page)
